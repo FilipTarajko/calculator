@@ -44,6 +44,18 @@ function press(id)
         value*=-1;
         displayValue();
     }
+    else if(id=="⌫")
+    {
+        if(value>=0)
+        {
+            value=Math.floor(value/10);
+        }
+        else
+        {
+            value=Math.ceil(value/10);
+        }
+        displayValue();
+    }
     console.log("wykryto "+id);
 }
 
