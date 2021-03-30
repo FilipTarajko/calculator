@@ -18,8 +18,18 @@ function divide(a,b){
     }
 };
 
-let activeOperator;
-let toRemovePressed;
+function resetValues()
+{
+    toRemovePressed = undefined;
+    ignoreNext = false;
+    operation = undefined;
+    target = 0;
+    visibleTemp = false;
+    targetTemp = false;
+    value = 0;
+    temp = 0;
+}
+
 function clearPressed()
 {
     toRemovePressed = document.getElementsByClassName('pressed');
@@ -41,10 +51,12 @@ function set(x)
         if (targetTemp)
         {
             temp = target;
+            visibleTemp = true;
         }
         else
         {
             value = target;
+            visibleTemp = false;
         }
         display();
     }
@@ -81,10 +93,17 @@ function press(id)
     target = targetTemp?temp:value;
     if(pressable.includes(id))
     {   
-        evaluate();
         clearPressed();
-        targetTemp = true;
         document.getElementById(id).classList.add('pressed');
+        if(operation!=id || !operation)
+        {
+            temp = 0;
+        }
+        else
+        {
+            evaluate();
+        }
+        targetTemp = true;
     }
     else if(numbers.includes(parseInt(id)))
     {
@@ -96,6 +115,7 @@ function press(id)
     }
     else if(id=="C")
     {
+        target = value;
         targetTemp = false;
         set(0);
         temp = 0;
@@ -107,6 +127,14 @@ function press(id)
     }
     else if(id=="⌫")
     {
+        if(visibleTemp)
+        {
+            target = temp;
+        }
+        else
+        {
+            target = value;
+        }
         if(target>=0)
         {
             set(Math.floor(target/10));
@@ -157,11 +185,15 @@ function drawButtons()
     }  
 }
 
-let ignoreNext = false;
+let toRemovePressed;
+let ignoreNext;
 let operation;
-let target = 0;
-let targetTemp = false;
-let value = 0;
-let temp = 0;
+let target;
+let visibleTemp;
+let targetTemp;
+let value;
+let temp;
+
+resetValues();
 drawButtons();
 display();
