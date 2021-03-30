@@ -8,7 +8,8 @@ substract = (a,b) => a-b;
 multiply = (a,b) => a*b;
 divide = (a,b) => a/b;
 
-let toRemovePressed
+let activeOperator;
+let toRemovePressed;
 function clearPressed()
 {
     toRemovePressed = document.getElementsByClassName('pressed');
@@ -18,6 +19,11 @@ function clearPressed()
     }
 }
 
+function displayValue()
+{
+    valueDisplay.textContent = value;
+}
+
 function press(id)
 {
     clearPressed();
@@ -25,7 +31,13 @@ function press(id)
     {
         document.getElementById(id).classList.add('pressed');
     }
-    console.log(id);
+    if(numbers.includes(parseInt(id)))
+    {
+        console.log("dodana cyfra: "+id);
+        value = 10*value+parseInt(id);
+        displayValue();
+    }
+    console.log("wykryto "+id);
 }
 
 function operate(a, operator, b){
@@ -44,6 +56,7 @@ function operate(a, operator, b){
 }
 
 let buttons = ['CE', 'C', '⌫', '÷' , 7, 8, 9, 'x', 4, 5, 6, '-', 1, 2, 3, '+', '+/-', 0, ',', '='];
+let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 let pressable = ['÷', 'x', '-', '+'];
 
 function drawButtons()
@@ -63,4 +76,4 @@ function drawButtons()
 
 let value = 0;
 drawButtons();
-valueDisplay.textContent = value;
+displayValue();
