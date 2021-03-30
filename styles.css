@@ -35,3 +35,7 @@ h1{
     width: 100px;
     font-size: 40px;
 }
+
+.pressed{
+    color: red;
+}
