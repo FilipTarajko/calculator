@@ -1,6 +1,7 @@
 console.log('script works!');
 
 const buttonContainer = document.querySelector('#buttonContainer');
+const valueDisplay = document.querySelector("#valueDisplay");
 
 add = (a,b) => a+b;
 substract = (a,b) => a-b;
@@ -35,4 +36,6 @@ function drawButtons()
     }  
 }
 
+let value = 0;
 drawButtons();
+valueDisplay.textContent = value;
