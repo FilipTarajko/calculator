@@ -22,11 +22,11 @@ function operate(a, operator, b){
     }
 }
 
-let buttons = [7, 8, 9, 'x', 4, 5, 6, '-', 1, 2, 3, '+', 'C', 0, '⌫', '='];
+let buttons = ['CE', 'C', '⌫', '÷' , 7, 8, 9, 'x', 4, 5, 6, '-', 1, 2, 3, '+', '+/-', 0, ',', '='];
 
 function drawButtons()
 {
-    for(let i=0; i<16; i++)
+    for(let i=0; i<20; i++)
     {
         let newButton = document.createElement('button');
         newButton.classList.add('button');
