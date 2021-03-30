@@ -39,6 +39,11 @@ function press(id)
         value = 0;
         displayValue();
     }
+    else if(id=="+/-")
+    {
+        value*=-1;
+        displayValue();
+    }
     console.log("wykryto "+id);
 }
 
