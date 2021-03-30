@@ -1,5 +1,3 @@
-console.log('script works!');
-
 const buttonContainer = document.querySelector('#buttonContainer');
 const valueDisplay = document.querySelector("#valueDisplay");
 
@@ -31,10 +29,14 @@ function press(id)
     {
         document.getElementById(id).classList.add('pressed');
     }
-    if(numbers.includes(parseInt(id)))
+    else if(numbers.includes(parseInt(id)))
     {
-        console.log("dodana cyfra: "+id);
         value = 10*value+parseInt(id);
+        displayValue();
+    }
+    else if(id=="C")
+    {
+        value = 0;
         displayValue();
     }
     console.log("wykryto "+id);
