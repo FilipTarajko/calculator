@@ -118,8 +118,8 @@ function press(id)
         target = value;
         targetTemp = false;
         set(0);
-        temp = 0;
         clearPressed();
+        resetValues();
     }
     else if(id=="+/-")
     {
