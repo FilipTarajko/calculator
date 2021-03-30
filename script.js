@@ -17,59 +17,98 @@ function clearPressed()
     }
 }
 
-function displayValue()
+function set(x)
 {
-    valueDisplay.textContent = value;
+    target = x;
+    if (targetTemp)
+    {
+        temp = target;
+    }
+    else
+    {
+        value = target;
+    }
+    display();
+}
+
+function display()
+{
+    valueDisplay.textContent = target;
+    // if(targetTemp)
+    // {
+    //     valueDisplay.textContent = temp;
+    // }
+    // else
+    // {
+    //     valueDisplay.textContent = value;
+    // }
 }
 
 function press(id)
 {
-    clearPressed();
+    target = targetTemp?temp:value;
     if(pressable.includes(id))
     {
+        clearPressed();
+        targetTemp = true;
+        temp = 0;
         document.getElementById(id).classList.add('pressed');
     }
     else if(numbers.includes(parseInt(id)))
     {
-        value = 10*value+parseInt(id);
-        displayValue();
+        set(10*target+parseInt(id));
+    }
+    else if(id=="CE")
+    {
+        set(0);
     }
     else if(id=="C")
     {
-        value = 0;
-        displayValue();
+        targetTemp = false;
+        set(0);
+        temp = 0;
+        clearPressed();
     }
     else if(id=="+/-")
     {
-        value*=-1;
-        displayValue();
+        set(target*=-1);
     }
     else if(id=="⌫")
     {
-        if(value>=0)
+        if(target>=0)
         {
-            value=Math.floor(value/10);
+            set(Math.floor(target/10));
         }
         else
         {
-            value=Math.ceil(value/10);
+            set(Math.ceil(target/10));
         }
-        displayValue();
+    }
+    else if(id=="=")
+    {
+        targetTemp = false;
+        if (document.getElementsByClassName('pressed').length>0)
+        {
+            operation = document.getElementsByClassName('pressed')[0].id;
+        }
+        set(operate(value, operation, temp));
+        clearPressed();
     }
     console.log("wykryto "+id);
+    console.log(`value: ${value}, temp: ${temp}, target: ${target}`);
 }
 
 function operate(a, operator, b){
     if(operator == '+'){
         return add(a,b);
     }
-    if(operator == '-'){
+    else if(operator == '-'){
         return substract(a,b);
     }
-    if(operator == '*'){
+    else if(operator == 'x'){
         return multiply(a,b);
     }
-    if(operator == '/'){
+    else if(operator == '÷'){
         return divide(a,b);
     }
 }
@@ -93,6 +132,10 @@ function drawButtons()
     }  
 }
 
+let operation;
+let target = 0;
+let targetTemp = false;
 let value = 0;
+let temp = 0;
 drawButtons();
-displayValue();
+display();

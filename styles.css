@@ -1,13 +1,11 @@
-h1{
-    color: navy;
-}
-
 #calculator{
+    margin: auto;
     background-color: aqua;
     width: 435px;
     height: 660px;
     padding-top: 10px;
     border-radius: 10px;
+    margin-top: 100px;
 }
 
 #valueDisplay{
