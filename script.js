@@ -4,7 +4,19 @@ const valueDisplay = document.querySelector("#valueDisplay");
 add = (a,b) => a+b;
 substract = (a,b) => a-b;
 multiply = (a,b) => a*b;
-divide = (a,b) => a/b;
+function divide(a,b){
+    if(b!=0)
+    {
+        return a/b;
+    }
+    else
+    {
+        display("Can't divide by 0!");
+        temp = 0;
+        ignoreNext = true;
+        return 0;
+    }
+};
 
 let activeOperator;
 let toRemovePressed;
@@ -19,24 +31,31 @@ function clearPressed()
 
 function set(x)
 {
-    target = x;
-    if (targetTemp)
+    if(ignoreNext)
     {
-        temp = target;
+        ignoreNext = false;
     }
     else
     {
-        value = target;
+        target = x;
+        if (targetTemp)
+        {
+            temp = target;
+        }
+        else
+        {
+            value = target;
+        }
+        display();
     }
-    display();
 }
 
-function display()
+function display(toDisplay = target)
 {
-    valueDisplay.textContent = target;
+    valueDisplay.textContent = toDisplay;
     if(valueDisplay.textContent.length>7)
     {
-        valueDisplay.style.fontSize = `${700/valueDisplay.textContent.length}px`;
+        valueDisplay.style.fontSize = `${800/valueDisplay.textContent.length}px`;
     }
     else
     {
@@ -46,12 +65,14 @@ function display()
 
 function evaluate()
 {
-    if (document.getElementsByClassName('pressed').length>0)
+    if(operation || document.getElementsByClassName('pressed').length>0)
     {
+        if (document.getElementsByClassName('pressed').length>0)
+        {
+            operation = document.getElementsByClassName('pressed')[0].id;
+        }
         targetTemp = false;
-        operation = document.getElementsByClassName('pressed')[0].id;
         set(operate(value, operation, temp));
-        clearPressed();
     }
 }
 
@@ -63,7 +84,6 @@ function press(id)
         evaluate();
         clearPressed();
         targetTemp = true;
-        temp = 0;
         document.getElementById(id).classList.add('pressed');
     }
     else if(numbers.includes(parseInt(id)))
@@ -137,6 +157,7 @@ function drawButtons()
     }  
 }
 
+let ignoreNext = false;
 let operation;
 let target = 0;
 let targetTemp = false;
