@@ -34,14 +34,14 @@ function set(x)
 function display()
 {
     valueDisplay.textContent = target;
-    // if(targetTemp)
-    // {
-    //     valueDisplay.textContent = temp;
-    // }
-    // else
-    // {
-    //     valueDisplay.textContent = value;
-    // }
+    if(valueDisplay.textContent.length>7)
+    {
+        valueDisplay.style.fontSize = `${700/valueDisplay.textContent.length}px`;
+    }
+    else
+    {
+        valueDisplay.style.fontSize = '100px';
+    }
 }
 
 function evaluate()
