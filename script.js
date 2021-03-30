@@ -44,11 +44,23 @@ function display()
     // }
 }
 
+function evaluate()
+{
+    if (document.getElementsByClassName('pressed').length>0)
+    {
+        targetTemp = false;
+        operation = document.getElementsByClassName('pressed')[0].id;
+        set(operate(value, operation, temp));
+        clearPressed();
+    }
+}
+
 function press(id)
 {
     target = targetTemp?temp:value;
     if(pressable.includes(id))
-    {
+    {   
+        evaluate();
         clearPressed();
         targetTemp = true;
         temp = 0;
@@ -86,13 +98,7 @@ function press(id)
     }
     else if(id=="=")
     {
-        targetTemp = false;
-        if (document.getElementsByClassName('pressed').length>0)
-        {
-            operation = document.getElementsByClassName('pressed')[0].id;
-        }
-        set(operate(value, operation, temp));
-        clearPressed();
+        evaluate();
     }
     console.log("wykryto "+id);
     console.log(`value: ${value}, temp: ${temp}, target: ${target}`);
