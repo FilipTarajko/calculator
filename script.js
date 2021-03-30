@@ -99,17 +99,16 @@ function press(id)
 }
 
 function operate(a, operator, b){
-    if(operator == '+'){
-        return add(a,b);
-    }
-    else if(operator == '-'){
-        return substract(a,b);
-    }
-    else if(operator == 'x'){
-        return multiply(a,b);
-    }
-    else if(operator == '÷'){
-        return divide(a,b);
+    switch(operator)
+    {
+        case '+':
+            return add(a,b);
+        case '-':
+            return substract(a,b);
+        case 'x':
+            return multiply(a,b);
+        case '÷':
+            return divide(a,b);
     }
 }
 
