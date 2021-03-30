@@ -22,19 +22,17 @@ function operate(a, operator, b){
     }
 }
 
+let buttons = [7, 8, 9, 'x', 4, 5, 6, '-', 1, 2, 3, '+', 'C', 0, '⌫', '='];
+
 function drawButtons()
 {
-    for(let i=0; i<4; i++)
+    for(let i=0; i<16; i++)
     {
-        for(let j=0; j<4; j++)
-        {
-            let newButton = document.createElement('button');
-            newButton.classList.add('button');
-            newButton.style.height = '100px';
-            newButton.style.width = '100px';
-            buttonContainer.appendChild(newButton);
-        }
-    }
+        let newButton = document.createElement('button');
+        newButton.classList.add('button');
+        newButton.textContent = buttons[i];
+        buttonContainer.appendChild(newButton);
+    }  
 }
 
 drawButtons();
