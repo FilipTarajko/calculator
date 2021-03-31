@@ -93,14 +93,20 @@ function press(id)
     target = targetTemp?temp:value;
     if(pressable.includes(id))
     {   
-        clearPressed();
-        document.getElementById(id).classList.add('pressed');
         if(operation!=id || !operation)
         {
-            temp = 0;
+            if(temp!=0)
+            {
+                evaluate();
+                temp = 0;
+            }
+            clearPressed();
+            document.getElementById(id).classList.add('pressed');
         }
         else
         {
+            clearPressed();
+            document.getElementById(id).classList.add('pressed');
             evaluate();
         }
         targetTemp = true;
