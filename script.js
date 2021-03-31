@@ -172,7 +172,7 @@ function operate(a, operator, b){
     }
 }
 
-let buttons = ['CE', 'C', '⌫', '÷' , 7, 8, 9, 'x', 4, 5, 6, '-', 1, 2, 3, '+', '+/-', 0, ',', '='];
+let buttons = ['CE', 'C', '⌫', '÷' , 7, 8, 9, 'x', 4, 5, 6, '-', 1, 2, 3, '+', '+/-', 0, '.', '='];
 let numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 let pressable = ['÷', 'x', '-', '+'];
 
@@ -183,6 +183,18 @@ function drawButtons()
         let newButton = document.createElement('button');
         newButton.classList.add('button');
         newButton.id = buttons[i];
+        if(buttons[i]=='.')
+        {
+            newButton.style.backgroundColor = 'rgb(50,100,100)';
+        }
+        else if(!numbers.includes(buttons[i]))
+        {
+            newButton.style.backgroundColor = 'rgb(150,200,200)';
+        }
+        else
+        {
+            newButton.style.backgroundColor = 'rgb(220,240,240)';
+        }
         newButton.textContent = buttons[i];
         newButton.addEventListener("click", function(){
             press(newButton.id);
